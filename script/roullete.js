@@ -1,13 +1,5 @@
 $(function () {
-    var options = [
-        "PASTOR",
-        "EQUIPO",
-        "GENTE",
-        "COMODIN",
-        "PASTOR",
-        "EQUIPO",
-        "GENTE",
-        "COMODIN",
+    var initialValues = [
         "PASTOR",
         "EQUIPO",
         "GENTE",
@@ -16,6 +8,7 @@ $(function () {
 
     var bombillo_url = "../img/bombillo_blanco.png";
 
+    var isSpinning = false;
     var scaleFactor = .17;
     var fontColor = "#FFFFFF"
     var blueTeam = '#008DDA';
@@ -37,7 +30,6 @@ $(function () {
     var fontSize = null;
     var selected = null;
 
-    var sectionAngle = 360 / options.length;
     var curvePoint = Math.PI / 180;
 
     var paper = Raphael(0, 0, width, height);
@@ -47,7 +39,26 @@ $(function () {
         y: height / 2
     };
 
+    var setupArray = function () {
+        var array = [];
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < initialValues.length; j++) {
+                array.push(initialValues[j]);
+            }
+        }
+
+        return array;
+    }
+
     var init = function () {
+
+        // for (var i = 0; i < 3; i++) {
+        //     for (var j = 0; j < initialValues.length; j++) {
+        //         options.push(initialValues[j]);
+        //         console.log(initialValues[j]);
+        //     }
+        // }
+
         drawRoullete();
         arrow = drawArrow();
 
@@ -209,9 +220,10 @@ $(function () {
     };
 
     var spin = function (data) {
+        isSpinning = true;
+
         if (data.random) {
             var degree = randomFromTo();
-            console.log(degree);
 
             if (selected) {
                 selected.attr({
@@ -244,8 +256,13 @@ $(function () {
                 labels[j].stop().animateWith(sections[0], { rotation: (degree + +labels[j].attr("rotation").split(" ").shift()) + " " + center.x + " " + center.y }, maxSecondsRun, '>');
             }
         } else {
-            var degree = 360 - getOptionAngle(data.selected);
+            var degree = getOptionAngle(data.selected);
             var section = document.elementFromPoint(center.x + rInner + 2, center.y);
+
+            // Draw angle
+            // var x = center.x + rOuter * Math.cos(degree * (Math.PI / 180));
+            // var y = center.y + rOuter * Math.sin(degree * (Math.PI / 180));
+            // var circle = paper.circle(x, y, 5).attr("fill", "#FF0000");
 
             if (selected) {
                 selected.attr({
@@ -278,7 +295,16 @@ $(function () {
                 labels[j].stop().animateWith(sections[0], { rotation: (degree + +labels[j].attr("rotation").split(" ").shift()) + " " + center.x + " " + center.y }, maxSecondsRun, '>');
             }
         }
+
+        setTimeout(function () {
+            isSpinning = false;
+            console.log('finish spin');
+        }, maxSecondsRun);
     };
+
+    var getRandomInt = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     var getOptionAngle = function (selectedOption) {
         var selectionGroup = [];
@@ -290,16 +316,28 @@ $(function () {
             }
         }
 
-        var randomIndex = Math.floor(Math.random() * (selectionGroup.length - 0));
+        var randomIndex = getRandomInt(0, selectionGroup.length);
         var elementGoTo = selectionGroup[randomIndex];
         var angle = elementGoTo.attr("rotation").split(" ")[0];
-        return angle;
+
+        var angle = (360 * 4) - angle;
+
+        while (angle < 0 || angle < 180) {
+            angle += 360 * 4;
+        }
+
+        return angle - getRandomInt(-14, 14);
     };
+
+    var options = setupArray();
+    var sectionAngle = 360 / options.length;
 
     init();
 
     // Electron mainRenderer
     require('electron').ipcRenderer.on('roullete-selection', function (event, message) {
-        spin(message);
+        if (!isSpinning)
+            spin(message);
+        else console.log('isSpinning');
     });
 });

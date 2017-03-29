@@ -1,5 +1,6 @@
 const electron = require('electron')
 const { app, BrowserWindow } = electron
+const debug = true
 
 app.on('ready', () => {
     setUpScreens()
@@ -19,14 +20,19 @@ function setUpScreens() {
 
     if (externalDisplay) {
         let roulleteWin = new BrowserWindow({
-            // frame: false,
+            frame: debug ? true : false,
             x: externalDisplay.bounds.x,
             y: externalDisplay.bounds.y,
             width: 1080,
             height: 720
         })
-        // roulleteWin.setMenu(null)
         roulleteWin.loadURL(`file://${__dirname}/html/roullete.html`)
+
+        if (!debug)
+            roulleteWin.setMenu(null)
+
+        if (debug)
+            roulleteWin.webContents.openDevTools()
 
         const ipcMain = electron.ipcMain
         ipcMain.on('roullete-option', function (event, arg) {
@@ -43,6 +49,16 @@ function setUpScreens() {
         width: 720,
         height: 720
     })
-    // controlWin.setMenu(null)
     controlWin.loadURL(`file://${__dirname}/html/controller.html`)
+
+    if (!debug)
+        controlWin.setMenu(null)
+
+    if (debug)
+        controlWin.webContents.openDevTools()
+
+    // Close the whole app
+    controlWin.on('closed', function () {
+        app.quit()
+    })
 }
