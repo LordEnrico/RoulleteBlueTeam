@@ -51,14 +51,6 @@ $(function () {
     }
 
     var init = function () {
-
-        // for (var i = 0; i < 3; i++) {
-        //     for (var j = 0; j < initialValues.length; j++) {
-        //         options.push(initialValues[j]);
-        //         console.log(initialValues[j]);
-        //     }
-        // }
-
         drawRoullete();
         arrow = drawArrow();
 
@@ -208,7 +200,7 @@ $(function () {
 
     var highlight = function () {
         var section = document.elementFromPoint(center.x + rInner + 2, center.y);
-
+        
         if (section.raphael) {
             selected = section.raphael;
             var label = document.getElementById("label-" + section.id.split("-")[1]);
