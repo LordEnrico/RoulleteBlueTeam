@@ -215,7 +215,7 @@ $(function () {
             arrow.hide();
             section.raphael.toFront();
             label.raphael.toFront();
-            section.raphael.animate({ "stroke-width": 30 }, 2000, "elastic");
+            section.raphael.animate({ "stroke-width": 75 }, 1500, "elastic");
         }
     };
 
@@ -322,7 +322,7 @@ $(function () {
 
         var angle = (360 * 4) - angle;
 
-        while (angle < 0 || angle < 180) {
+        while (angle < 0 || angle < 360) {
             angle += 360 * 4;
         }
 
