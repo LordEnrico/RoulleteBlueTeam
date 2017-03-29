@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Controller</title>
+</head>
+
+<body>
+    <h1>Hello World Controller</h1>
+    <button type="button" class="btn" id="btn-pastor" value="PASTOR">PASTOR</button>
+    <button type="button" class="btn" id="btn-gente" value="GENTE">GENTE</button>
+    <button type="button" class="btn" id="btn-equipo" value="EQUIPO">EQUIPO</button>
+    <button type="button" class="btn" id="btn-patria" value="COMODIN">COMODIN</button>
+    <button type="button" class="btn" id="btn-patria" value="">RANDOM</button>
+
+    <script>
+        if (typeof module === 'object') { window.module = module; module = undefined; }
+    </script>
+    <script src="../script/jquery-3.2.0.min.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
+    <script>
+        const ipcRenderer = require('electron').ipcRenderer;
+        let btn = $('.btn');
+        btn.click(function (e) {
+            ipcRenderer.send('roullete-option', (e.target).value);
+        });
+    </script>
+</body>
+
+</html>

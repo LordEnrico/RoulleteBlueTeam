@@ -1,0 +1,12 @@
+{
+    "name": "roulette-blue",
+    "version": "0.1.0",
+    "description": "Roullete Blue Team",
+    "scripts": {
+        "start": "electron index.js"
+    },
+    "author": "Josue Mavarez",
+    "devDependencies": {
+        "electron": "~1.6.2"
+    }
+}
