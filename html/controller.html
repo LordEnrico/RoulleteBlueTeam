@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title class="center">Roullete Controller</title>
     <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
     <link href="../libs/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -14,7 +15,7 @@
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-pastor" value="PASTOR">Pastor</button>
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-gente" value="GENTE">Gente</button>
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-equipo" value="EQUIPO">Equipo</button>
-            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-patria" value="COMODIN">Comodin</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-patria" value="COMODÍN">Comodín</button>
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-random" value="">Random</button>
         </div>
         <div class="row">
@@ -53,9 +54,105 @@
 
         btnScreen.click(function (e) {
             ipcRenderer.send('roullete-move-screen', (e.target).value);
-            console.log((e.target).value);
         });
     </script>
 </body>
 
 </html>
+<!--<html>
+
+<head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="../libs/airconsole-controls/button/button.css">
+    <link rel="stylesheet" href="../libs/airconsole-controls/dpad/dpad.css">
+    <link rel="stylesheet" href="../libs/airconsole-controls/joystick/joystick.css">
+    <link rel="stylesheet" href="../libs/airconsole-controls/ctrl-generator/controller.css">
+</head>
+
+<body>
+
+    <div class="gamepad_container">
+        <div id="left" class="left"></div>
+        <div id="middle" class="middle"></div>
+        <div id="right" class="right"></div>
+    </div>
+
+
+    <div style="display: none;">
+        <div id="template-DPad">
+            <div>
+                <div class="dpad-arrow dpad-arrow-up"></div>
+                <div class="dpad-arrow dpad-arrow-down"></div>
+                <div class="dpad-arrow dpad-arrow-left"></div>
+                <div class="dpad-arrow dpad-arrow-right"></div>
+            </div>
+        </div>
+
+        <div id="template-DPadRelative">
+            <div>
+                <div class="dpad-instructions">SWIPE</div>
+                <div class="dpad-arrow dpad-arrow-up"></div>
+                <div class="dpad-arrow dpad-arrow-down"></div>
+                <div class="dpad-arrow dpad-arrow-left"></div>
+                <div class="dpad-arrow dpad-arrow-right"></div>
+            </div>
+        </div>
+
+        <div id="template-Joystick" class="joystick">
+            <div class="joystick-relative">
+                <div class="joystick-relative-stick"></div>
+            </div>
+        </div>
+
+        <div id="template-SwipeDigital" class="button-300-300 swipe-area">
+            <div class="button-text">SWIPE</div>
+        </div>
+        <div id="template-SwipeAnalog" class="button-300-300 swipe-area">
+            <div class="button-text">SWIPE</div>
+        </div>
+
+        <div id="template-SwipePattern" class="swipe-pattern-container"></div>
+
+        <div id="template-ButtonVertical" class="button-300-150">
+            <div class="button-text"></div>
+        </div>
+
+        <div id="template-ButtonMiddle" class="button-80">
+            <div class="button-text">START</div>
+        </div>
+    </div>
+
+    <script>
+        if (typeof module === 'object') { window.module = module; module = undefined; }
+    </script>
+
+    <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.3.0.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/rate-limiter/rate-limiter.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/dpad/dpad.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/joystick/joystick.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/button/button.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/swipe-digital/swipe-digital.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/swipe-analog/swipe-analog.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/swipe-pattern/swipe-pattern.js"></script>
+    <script type="text/javascript" src="../libs/airconsole-controls/ctrl-generator/ctrl-generator.js"></script>
+
+    <script>
+        if (window.module) module = window.module;
+    </script>
+    <script type="text/javascript">
+        var airconsole = new AirConsole({ orientation: AirConsole.ORIENTATION_LANDSCAPE });
+        CtrlGenerator.setAirConsole(airconsole);
+        CtrlGenerator.generate({ "left": { "type": { "label": "DPad", "class_name": "DPad" } }, "middle": [{ "label": "Random", "key": "random" }], "right": [{ "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "PASTOR", "key": "pastor", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "EQUIPO", "key": "equipo", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "GENTE", "key": "gente", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "COMODÍN", "key": "comodín", "on_up_message": false }] });
+
+        var random = new Button("Random", {
+            "down": function () {
+                console.log('test');
+            },
+            "up": function () {
+                console.log('test');
+            }
+        })
+    </script>
+</body>
+
+</html>-->

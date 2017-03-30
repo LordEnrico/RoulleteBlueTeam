@@ -75,7 +75,7 @@ function setUpScreens() {
 
     controlWin = new BrowserWindow({
         width: 720,
-        height: 720
+        height: 360
     })
     controlWin.loadURL(`file://${__dirname}/html/controller.html`)
     controlWin.setResizable(false)

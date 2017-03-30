@@ -3,7 +3,7 @@ $(function () {
         "PASTOR",
         "EQUIPO",
         "GENTE",
-        "COMODIN"
+        "COMODÍN"
     ];
 
     var bombillo_url = "../img/bombillo_blanco.png";
@@ -58,7 +58,7 @@ $(function () {
         drawRoullete();
         arrow = drawArrow();
 
-        var logoBackground = paper.circle(center.x, center.y, rInner).attr("fill", "#008DDA");
+        var logoBackground = paper.circle(center.x, center.y, rInner + 15).attr("fill", "#008DDA");
         logoBackground.toBack();
 
         var bombilloImg = new Image();
