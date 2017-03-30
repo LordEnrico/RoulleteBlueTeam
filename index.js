@@ -38,6 +38,7 @@ function setUpScreens() {
     }
 
     roulleteWin.loadURL(`file://${__dirname}/html/roullete.html`)
+    roulleteWin.setResizable(false)
 
     if (!debug)
         roulleteWin.setMenu(null)
@@ -60,6 +61,7 @@ function setUpScreens() {
         height: 720
     })
     controlWin.loadURL(`file://${__dirname}/html/controller.html`)
+    controlWin.setResizable(false)
 
     if (!debug)
         controlWin.setMenu(null)

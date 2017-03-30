@@ -200,7 +200,7 @@ $(function () {
 
     var highlight = function () {
         var section = document.elementFromPoint(center.x + rInner + 2, center.y);
-        
+
         if (section.raphael) {
             selected = section.raphael;
             var label = document.getElementById("label-" + section.id.split("-")[1]);
@@ -251,10 +251,10 @@ $(function () {
             var degree = getOptionAngle(data.selected);
             var section = document.elementFromPoint(center.x + rInner + 2, center.y);
 
-            // Draw angle
+            // Debug Indicator
             // var x = center.x + rOuter * Math.cos(degree * (Math.PI / 180));
             // var y = center.y + rOuter * Math.sin(degree * (Math.PI / 180));
-            // var circle = paper.circle(x, y, 5).attr("fill", "#FF0000");
+            // var debugIndicator = paper.circle(x, y, 5).attr("fill", "#FF0000");
 
             if (selected) {
                 selected.attr({
@@ -308,7 +308,7 @@ $(function () {
             }
         }
 
-        var randomIndex = getRandomInt(0, selectionGroup.length);
+        var randomIndex = getRandomInt(0, (selectionGroup.length - 1));
         var elementGoTo = selectionGroup[randomIndex];
         var angle = elementGoTo.attr("rotation").split(" ")[0];
 

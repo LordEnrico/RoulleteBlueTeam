@@ -1,0 +1,8 @@
+body {
+    background-color: #008DDA;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

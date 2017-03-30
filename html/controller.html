@@ -1,21 +1,32 @@
 <html>
 
 <head>
-    <title>Controller</title>
+    <title class="center">Roullete Controller</title>
+    <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-    <h1>Hello World Controller</h1>
-    <button type="button" class="btn" id="btn-pastor" value="PASTOR">PASTOR</button>
-    <button type="button" class="btn" id="btn-gente" value="GENTE">GENTE</button>
-    <button type="button" class="btn" id="btn-equipo" value="EQUIPO">EQUIPO</button>
-    <button type="button" class="btn" id="btn-patria" value="COMODIN">COMODIN</button>
-    <button type="button" class="btn" id="btn-patria" value="">RANDOM</button>
+    <div class="row">
+        <div class="col-lg-1 col-centered">
+            <h1>Roullete Controller</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-default col-sm-6" id="btn-pastor" value="PASTOR">Pastor</button>
+            <button type="button" class="btn btn-default col-sm-6" id="btn-gente" value="GENTE">Gente</button>
+            <button type="button" class="btn btn-default col-sm-6" id="btn-equipo" value="EQUIPO">Equipo</button>
+            <button type="button" class="btn btn-default col-sm-6" id="btn-patria" value="COMODIN">Comodin</button>
+            <button type="button" class="btn btn-default col-sm-6" id="btn-random" value="">Random</button>
+        </div>
+    </div>
 
     <script>
         if (typeof module === 'object') { window.module = module; module = undefined; }
     </script>
     <script src="../libs/jquery/dist/jquery.min.js"></script>
+    <script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         if (window.module) module = window.module;
     </script>
