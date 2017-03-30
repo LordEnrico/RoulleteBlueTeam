@@ -26,13 +26,13 @@ function setUpScreens() {
             frame: debug ? true : false,
             x: externalDisplay.bounds.x,
             y: externalDisplay.bounds.y,
-            width: 1080,
+            width: 1280,
             height: 720
         })
     } else {
         roulleteWin = new BrowserWindow({
             frame: debug ? true : false,
-            width: 1080,
+            width: 1280,
             height: 720
         })
     }
@@ -54,6 +54,23 @@ function setUpScreens() {
         };
 
         roulleteWin.webContents.send('roullete-selection', data)
+    });
+
+    ipcMain.on('roullete-move-screen', function (event, arg) {
+        switch (arg) {
+            case 'up':
+                roulleteWin.setPosition(roulleteWin.getPosition()[0], roulleteWin.getPosition()[1] - 10)
+                break
+            case 'down':
+                roulleteWin.setPosition(roulleteWin.getPosition()[0], roulleteWin.getPosition()[1] + 10)
+                break
+            case 'left':
+                roulleteWin.setPosition(roulleteWin.getPosition()[0] - 10, roulleteWin.getPosition()[1])
+                break
+            case 'right':
+                roulleteWin.setPosition(roulleteWin.getPosition()[0] + 10, roulleteWin.getPosition()[1])
+                break
+        }
     });
 
     controlWin = new BrowserWindow({

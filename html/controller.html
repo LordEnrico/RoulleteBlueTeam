@@ -3,22 +3,33 @@
 <head>
     <title class="center">Roullete Controller</title>
     <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../libs/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-lg-1 col-centered">
-            <h1>Roullete Controller</h1>
-        </div>
-    </div>
+    <h1>Roullete Controller</h1>
     <div class="container">
         <div class="row">
-            <button type="button" class="btn btn-default col-sm-6" id="btn-pastor" value="PASTOR">Pastor</button>
-            <button type="button" class="btn btn-default col-sm-6" id="btn-gente" value="GENTE">Gente</button>
-            <button type="button" class="btn btn-default col-sm-6" id="btn-equipo" value="EQUIPO">Equipo</button>
-            <button type="button" class="btn btn-default col-sm-6" id="btn-patria" value="COMODIN">Comodin</button>
-            <button type="button" class="btn btn-default col-sm-6" id="btn-random" value="">Random</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-pastor" value="PASTOR">Pastor</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-gente" value="GENTE">Gente</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-equipo" value="EQUIPO">Equipo</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-patria" value="COMODIN">Comodin</button>
+            <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-random" value="">Random</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-up" value="up">
+                <i class="mdi mdi-chevron-up"></i>
+            </button>
+            <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-down" value="down">
+                <i class="mdi mdi-chevron-down"></i>
+            </button>
+            <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-left" value="left">
+                <i class="mdi mdi-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-right" value="right">
+                <i class="mdi mdi-chevron-right"></i>
+            </button>
         </div>
     </div>
 
@@ -33,9 +44,16 @@
 
     <script>
         const ipcRenderer = require('electron').ipcRenderer;
-        let btn = $('.btn');
-        btn.click(function (e) {
+        let btnRoullete = $('.btnRoullete');
+        let btnScreen = $('.btnScreen');
+
+        btnRoullete.click(function (e) {
             ipcRenderer.send('roullete-option', (e.target).value);
+        });
+
+        btnScreen.click(function (e) {
+            ipcRenderer.send('roullete-move-screen', (e.target).value);
+            console.log((e.target).value);
         });
     </script>
 </body>

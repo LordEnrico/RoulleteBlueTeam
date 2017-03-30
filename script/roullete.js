@@ -7,14 +7,19 @@ $(function () {
     ];
 
     var bombillo_url = "../img/bombillo_blanco.png";
+    var kappa_url = "../img/kappa.png";
+    var totalOptionMultiplier = 3;
+
+    var kappa;
+    var isKappaEnabled = true;
 
     var isSpinning = false;
     var scaleFactor = .17;
-    var fontColor = "#FFFFFF"
+    var fontColor = "#FAFAFA";
     var blueTeam = '#008DDA';
-    var color = ["#8dc653", "#78bde7", "#d4de57", "#71afac"];
+    var color = ["#F44336", "#2196F3", "#FDD835", "#FF9800"];
     var maxSecondsRun = "5000";
-    var arrowColor = ["#000000", "#000000", 4];
+    var arrowColor = ["#FFFFFF", "#FFFFFF", 4];
     var strokeWidth = 1;
     var random = [744, 3478];
 
@@ -41,18 +46,20 @@ $(function () {
 
     var setupArray = function () {
         var array = [];
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < initialValues.length; j++) {
-                array.push(initialValues[j]);
-            }
+        for (var i = 0; i < initialValues.length * totalOptionMultiplier; i++) {
+            array.push(initialValues[i % initialValues.length]);
         }
 
         return array;
     }
 
     var init = function () {
+        console.log(isKappaEnabled);
         drawRoullete();
         arrow = drawArrow();
+
+        var logoBackground = paper.circle(center.x, center.y, rInner).attr("fill", "#008DDA");
+        logoBackground.toBack();
 
         var bombilloImg = new Image();
         bombilloImg.src = bombillo_url;
@@ -66,6 +73,22 @@ $(function () {
                 bombilloImg.height / 3.5
             );
         };
+
+        if (isKappaEnabled) {
+            var kappaImg = new Image();
+            kappaImg.src = kappa_url;
+
+            kappaImg.onload = function () {
+                kappa = paper.image(
+                    kappa_url,
+                    center.x - kappaImg.width / 7 - 15,
+                    center.y - kappaImg.height / 7 - 7,
+                    kappaImg.width / 3.25,
+                    kappaImg.height / 3.25
+                );
+                kappa.hide();
+            };
+        }
     };
 
     var drawRoullete = function () {
@@ -199,7 +222,7 @@ $(function () {
     };
 
     var highlight = function () {
-        var section = document.elementFromPoint(center.x + rInner + 2, center.y);
+        var section = document.elementFromPoint(center.x + rInner + 5, center.y);
 
         if (section.raphael) {
             selected = section.raphael;
@@ -207,12 +230,21 @@ $(function () {
             arrow.hide();
             section.raphael.toFront();
             label.raphael.toFront();
-            section.raphael.animate({ "stroke-width": 75 }, 1500, "elastic");
+            section.raphael.animate({ "stroke-width": 70 }, 1500, "elastic");
+
+            if (isKappaEnabled) {
+                if (label.raphael[0].textContent === "COMODIN") {
+                    kappa.show();
+                }
+            }
         }
     };
 
     var spin = function (data) {
         isSpinning = true;
+
+        if (isKappaEnabled)
+            kappa.hide();
 
         if (data.random) {
             var degree = randomFromTo();
