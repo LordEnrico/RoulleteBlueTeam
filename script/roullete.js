@@ -13,6 +13,7 @@ $(function () {
 
     var kappa;
     var isKappaEnabled = true;
+    var quack;
 
     var isSpinning = false;
     var scaleFactor = .17;
@@ -55,7 +56,8 @@ $(function () {
     }
 
     var init = function () {
-        console.log(isKappaEnabled);
+        quack = document.getElementById("quack");
+
         drawRoullete();
         arrow = drawArrow();
 
@@ -235,12 +237,13 @@ $(function () {
             section.raphael.toFront();
             label.raphael.toFront();
 
-            if (isKappaEnabled) {
-                if (label.raphael[0].textContent === initialValues[3]) {
+            if (label.raphael[0].textContent === initialValues[3]) {
+                quack.play();
+                if (isKappaEnabled) {
                     kappa.show();
                 }
             }
-            
+
             section.raphael.animate({ "stroke-width": 70 }, 1500, "elastic");
         }
     };
