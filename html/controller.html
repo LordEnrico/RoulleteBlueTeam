@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <h1>Roullete Controller</h1>
     <div class="container">
         <div class="row">
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-pastor" value="PASTOR">Pastor</button>
@@ -18,21 +17,32 @@
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-patria" value="COMODÍN">Comodín</button>
             <button type="button" class="btn btn-default btnRoullete col-sm-6" id="btn-random" value="">Random</button>
         </div>
+    </div>
+
+    <div class="container">
         <div class="row">
             <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-up" value="up">
-                <i class="mdi mdi-chevron-up"></i>
-            </button>
+                    <i class="mdi mdi-chevron-up"></i>
+                </button>
             <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-down" value="down">
-                <i class="mdi mdi-chevron-down"></i>
-            </button>
+                    <i class="mdi mdi-chevron-down"></i>
+                </button>
             <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-left" value="left">
-                <i class="mdi mdi-chevron-left"></i>
-            </button>
-            <button type="button" class="btn btn-default btnScreen col-sm-3" id="btn-right" value="right">
-                <i class="mdi mdi-chevron-right"></i>
-            </button>
+                    <i class="mdi mdi-chevron-left"></i>
+                </button>
+            <button type="button" class="btn btn-default col-sm-3" id="btn-right" value="right">
+                    <i class="mdi mdi-chevron-right"></i>
+                </button>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-default col-sm-3" id="quackButton">
+                    <i class="mdi mdi-duck"></i>
+                </button>
+        </div>
+    </div>
+    <audio id="quack" src="../sound/quack.mp3" autostart="false"></audio>
 
     <script>
         if (typeof module === 'object') { window.module = module; module = undefined; }
@@ -47,6 +57,12 @@
         const ipcRenderer = require('electron').ipcRenderer;
         let btnRoullete = $('.btnRoullete');
         let btnScreen = $('.btnScreen');
+        let quack = $('#quackButton');
+
+        quack.click(function (e) {
+            var sound = document.getElementById("quack");
+            sound.play();
+        });
 
         btnRoullete.click(function (e) {
             ipcRenderer.send('roullete-option', (e.target).value);

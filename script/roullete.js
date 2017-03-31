@@ -9,6 +9,7 @@ $(function () {
     var bombillo_url = "../img/bombillo_blanco.png";
     var kappa_url = "../img/kappa.png";
     var totalOptionMultiplier = 3;
+    var logoBackground;
 
     var kappa;
     var isKappaEnabled = true;
@@ -58,7 +59,7 @@ $(function () {
         drawRoullete();
         arrow = drawArrow();
 
-        var logoBackground = paper.circle(center.x, center.y, rInner + 15).attr("fill", "#008DDA");
+        logoBackground = paper.circle(center.x, center.y, rInner + 15).attr("fill", "#008DDA");
         logoBackground.toBack();
 
         var bombilloImg = new Image();
@@ -86,6 +87,7 @@ $(function () {
                     kappaImg.width / 3.25,
                     kappaImg.height / 3.25
                 );
+                kappa.node.zIndex = 90
                 kappa.hide();
             };
         }
@@ -185,7 +187,6 @@ $(function () {
         arrow.node.id = "arrow";
         arrow.node.zIndex = 100;
         return arrow;
-
     };
 
     var drawLabel = function (label, angle, points, i) {
@@ -222,6 +223,9 @@ $(function () {
     };
 
     var highlight = function () {
+        isSpinning = false;
+        console.log('finish spin');
+
         var section = document.elementFromPoint(center.x + rInner + 5, center.y);
 
         if (section.raphael) {
@@ -230,13 +234,14 @@ $(function () {
             arrow.hide();
             section.raphael.toFront();
             label.raphael.toFront();
-            section.raphael.animate({ "stroke-width": 70 }, 1500, "elastic");
 
             if (isKappaEnabled) {
-                if (label.raphael[0].textContent === "COMODIN") {
+                if (label.raphael[0].textContent === initialValues[3]) {
                     kappa.show();
                 }
             }
+            
+            section.raphael.animate({ "stroke-width": 70 }, 1500, "elastic");
         }
     };
 
@@ -257,6 +262,7 @@ $(function () {
                 arrow.show();
                 var label = document.getElementById("label-" + selected.node.id.split("-")[1]);
                 selected.toBack();
+                logoBackground.toBack();
             }
 
             for (var z = 0; z < options.length; z++) {
@@ -296,6 +302,7 @@ $(function () {
                 arrow.show();
                 var label = document.getElementById("label-" + selected.node.id.split("-")[1]);
                 selected.toBack();
+                logoBackground.toBack();
             }
 
             for (var z = 0; z < options.length; z++) {
@@ -319,11 +326,6 @@ $(function () {
                 labels[j].stop().animateWith(sections[0], { rotation: (degree + +labels[j].attr("rotation").split(" ").shift()) + " " + center.x + " " + center.y }, maxSecondsRun, '>');
             }
         }
-
-        setTimeout(function () {
-            isSpinning = false;
-            console.log('finish spin');
-        }, maxSecondsRun);
     };
 
     var getRandomInt = function (min, max) {
