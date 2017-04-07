@@ -1,6 +1,6 @@
 const electron = require('electron')
 const { app, BrowserWindow } = electron
-const debug = true
+const debug = false
 
 app.on('ready', () => {
     setUpScreens()
@@ -26,14 +26,14 @@ function setUpScreens() {
             frame: debug ? true : false,
             x: externalDisplay.bounds.x,
             y: externalDisplay.bounds.y,
-            width: 1280,
-            height: 720
+            width: 1024,
+            height: 768
         })
     } else {
         roulleteWin = new BrowserWindow({
             frame: debug ? true : false,
-            width: 1280,
-            height: 720
+            width: 1024,
+            height: 768
         })
     }
 

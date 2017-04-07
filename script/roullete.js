@@ -12,8 +12,9 @@ $(function () {
     var logoBackground;
 
     var kappa;
-    var isKappaEnabled = true;
+    var isKappaEnabled = false;
     var quack;
+    var aloh;
 
     var isSpinning = false;
     var scaleFactor = .17;
@@ -57,6 +58,7 @@ $(function () {
 
     var init = function () {
         quack = document.getElementById("quack");
+        aloh = document.getElementById("aloh");
 
         drawRoullete();
         arrow = drawArrow();
@@ -242,6 +244,8 @@ $(function () {
                 if (isKappaEnabled) {
                     kappa.show();
                 }
+            } else if (label.raphael[0].textContent === initialValues[0]) {
+                aloh.play();
             }
 
             section.raphael.animate({ "stroke-width": 70 }, 1500, "elastic");

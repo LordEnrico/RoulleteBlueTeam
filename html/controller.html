@@ -38,12 +38,19 @@
     <div class="container">
         <div class="row">
             <button type="button" class="btn btn-default col-sm-3" id="quackButton">
-                    <i class="mdi mdi-duck"></i>
-                </button>
+                <i class="mdi mdi-duck"></i>
+            </button>
+            <button type="button" class="btn btn-default col-sm-3" id="alohButton">
+                <i class="mdi mdi-voice"></i>
+            </button>
+            <button type="button" class="btn btn-default col-sm-3" id="qqsmButton">
+                <i class="mdi mdi-person"></i>
+            </button>
         </div>
     </div>
     <audio id="quack" src="../sound/quack.mp3" autostart="false"></audio>
-
+    <audio id="aloh" src="../sound/aloh.mp3" autostart="false"></audio>
+    <audio id="qqsm" src="../sound/qqsm.mp3" autostart="false"></audio>
     <script>
         if (typeof module === 'object') { window.module = module; module = undefined; }
     </script>
@@ -52,19 +59,32 @@
     <script>
         if (window.module) module = window.module;
     </script>
-
     <script>
         const ipcRenderer = require('electron').ipcRenderer;
         let btnRoullete = $('.btnRoullete');
         let btnScreen = $('.btnScreen');
         let quack = $('#quackButton');
+        let aloh = $('#alohButton');
+        let qqsm = $('#qqsmButton');
 
         quack.click(function (e) {
             var sound = document.getElementById("quack");
             sound.play();
         });
 
+        aloh.click(function (e) {
+            var sound = document.getElementById("aloh");
+            sound.play();
+        });
+
+        qqsm.click(function (e) {
+            var sound = document.getElementById("qqsm");
+            sound.play();
+        });
+
         btnRoullete.click(function (e) {
+            var sound = document.getElementById("qqsm");
+            sound.play();
             ipcRenderer.send('roullete-option', (e.target).value);
         });
 
@@ -75,100 +95,3 @@
 </body>
 
 </html>
-<!--<html>
-
-<head>
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <link rel="stylesheet" href="../libs/airconsole-controls/button/button.css">
-    <link rel="stylesheet" href="../libs/airconsole-controls/dpad/dpad.css">
-    <link rel="stylesheet" href="../libs/airconsole-controls/joystick/joystick.css">
-    <link rel="stylesheet" href="../libs/airconsole-controls/ctrl-generator/controller.css">
-</head>
-
-<body>
-
-    <div class="gamepad_container">
-        <div id="left" class="left"></div>
-        <div id="middle" class="middle"></div>
-        <div id="right" class="right"></div>
-    </div>
-
-
-    <div style="display: none;">
-        <div id="template-DPad">
-            <div>
-                <div class="dpad-arrow dpad-arrow-up"></div>
-                <div class="dpad-arrow dpad-arrow-down"></div>
-                <div class="dpad-arrow dpad-arrow-left"></div>
-                <div class="dpad-arrow dpad-arrow-right"></div>
-            </div>
-        </div>
-
-        <div id="template-DPadRelative">
-            <div>
-                <div class="dpad-instructions">SWIPE</div>
-                <div class="dpad-arrow dpad-arrow-up"></div>
-                <div class="dpad-arrow dpad-arrow-down"></div>
-                <div class="dpad-arrow dpad-arrow-left"></div>
-                <div class="dpad-arrow dpad-arrow-right"></div>
-            </div>
-        </div>
-
-        <div id="template-Joystick" class="joystick">
-            <div class="joystick-relative">
-                <div class="joystick-relative-stick"></div>
-            </div>
-        </div>
-
-        <div id="template-SwipeDigital" class="button-300-300 swipe-area">
-            <div class="button-text">SWIPE</div>
-        </div>
-        <div id="template-SwipeAnalog" class="button-300-300 swipe-area">
-            <div class="button-text">SWIPE</div>
-        </div>
-
-        <div id="template-SwipePattern" class="swipe-pattern-container"></div>
-
-        <div id="template-ButtonVertical" class="button-300-150">
-            <div class="button-text"></div>
-        </div>
-
-        <div id="template-ButtonMiddle" class="button-80">
-            <div class="button-text">START</div>
-        </div>
-    </div>
-
-    <script>
-        if (typeof module === 'object') { window.module = module; module = undefined; }
-    </script>
-
-    <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.3.0.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/rate-limiter/rate-limiter.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/dpad/dpad.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/joystick/joystick.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/button/button.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/swipe-digital/swipe-digital.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/swipe-analog/swipe-analog.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/swipe-pattern/swipe-pattern.js"></script>
-    <script type="text/javascript" src="../libs/airconsole-controls/ctrl-generator/ctrl-generator.js"></script>
-
-    <script>
-        if (window.module) module = window.module;
-    </script>
-    <script type="text/javascript">
-        var airconsole = new AirConsole({ orientation: AirConsole.ORIENTATION_LANDSCAPE });
-        CtrlGenerator.setAirConsole(airconsole);
-        CtrlGenerator.generate({ "left": { "type": { "label": "DPad", "class_name": "DPad" } }, "middle": [{ "label": "Random", "key": "random" }], "right": [{ "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "PASTOR", "key": "pastor", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "EQUIPO", "key": "equipo", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "GENTE", "key": "gente", "on_up_message": false }, { "type": { "label": "ButtonVertical", "class_name": "Button" }, "label": "COMODÍN", "key": "comodín", "on_up_message": false }] });
-
-        var random = new Button("Random", {
-            "down": function () {
-                console.log('test');
-            },
-            "up": function () {
-                console.log('test');
-            }
-        })
-    </script>
-</body>
-
-</html>-->
